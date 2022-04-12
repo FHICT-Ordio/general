@@ -4,10 +4,9 @@ info:
   description: An API used for handling restaurant menus
   version: v1
 
-host: 86.92.40.132:1000
-basepath: /v1
-schemes:
-  - http
+servers:
+  - url: http://86.92.40.132:1000/v1
+    description: Main production server
 
 paths:
   /Menu:
