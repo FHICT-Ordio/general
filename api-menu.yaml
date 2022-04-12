@@ -1,9 +1,14 @@
 openapi: 3.0.1
-host: 86.92.40.132:1000
 info:
   title: Menu API
   description: An API used for handling restaurant menus
   version: v1
+
+host: 86.92.40.132:1000
+basepath: /v1
+schemes:
+  - http
+
 paths:
   /Menu:
     put:
