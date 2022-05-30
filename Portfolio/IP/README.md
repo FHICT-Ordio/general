@@ -1,6 +1,7 @@
-# Software S3 Portfolio depository - <br> Robin van Hoof
-![Portfolio](https://i.ytimg.com/vi/TwYKwaEjJd4/maxresdefault.jpg)
+# Individual Project - Robin van Hoof S3
+![Individual Project](https://cdn.sanity.io/images/e422uarq/production/016018a08eddf9bbaee619b77a92ff51051495f1-2000x945.png?fit=crop&fm=jpg&q=100&w=1200&h=630)
 
-This repository contains my portfolio for my [Individual Project (IP)](https://github.com/FHICT-Ordio/general/tree/main/Portfolio/IP) and parts of my [Group Project (GP)](https://github.com/FHICT-Ordio/general/tree/main/Portfolio/IP). 
-
-Furthermore, the common parts of our Group Project can be found on the [Eeventify main repository](https://github.com/Eeventify/main/tree/main/Documentation).
+Whe individual part of my portfolio are split up into a few different categories. These categories are the following:
+- My [products and learning outcome](./Products%20and%20learning%20outcomes.md) definitions for this project;
+- My [documentation]() for this project;
+- My [researches]() for this project;
