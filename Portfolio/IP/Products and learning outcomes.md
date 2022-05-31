@@ -337,11 +337,34 @@ This product touches learning outcome 1, 3, 4
 <br><br>
 
 ## API Documentation
+Because of the nature of the Ordio platform being a portal for fellow developers to build upon using the APIs, the API documentation is a very big vital part of making sure the project stays alive: Without clear documentation on how to use it, there's no point in keeping the service running if no one knows what to do with it. This is why I put a lot of time into geting the API documentation to a high level which will also be touched upon in my research later in the [Research](#research) chapter.
+
+<br>
+
 ### Swagger
+The first major component of the API documentation is the Swagger Portal. This Swagger Portal is one place where all the current and future API endpoint are and will be documenten. The endpoint definitions here are set up to be automatically generated from the live code and set to update whenever changes to this live code happend.
+
+Furthermore, the Swagger Portal also offers the tools to directly make calls to either the live production servers or a local test server, which can be used to play around with and test the endpoints. 
+
+The portal itself runs on a GitHub pag and doesnt depend on the APIs or other parts of the platform. This means that even if the APIs were to temporarily go down, developers could still use the information from the Portal to write their code. Take a look at the portal [here](https://fhict-ordio.github.io/general/).
+
+![Swagger](./Media/Swagger.png)
+
+<br>
+
+### Developer Notes
+Beside the documentation the Swagger Portal provides more documentation about the API for developers can be found on the Admin Webtool which will be talked about later in the [Ordio Admin Webtool](#ordio-admin-webtool) chapter. The Admin Webtool site has a developer section providing developers with in detail epxplainations on what endpoints to use for what purposes, how to use them, and in addition also giving you JavaScript and C# past-and-go code snippets for general API calls, and endpoint-specific API calls. This developer section can be found [here](https://robinvanhoof.tech/development).
+
+![Developer page](./Media/Developer%20page.png)
+
+<br>
+
+### Outcomes
+This product touches learning outcome 1, 4
 
 <br><br>
 
-## Ordio admin webtool
+## Ordio Admin Webtool
 
 
 <br><br>
@@ -351,7 +374,7 @@ This product touches learning outcome 1, 3, 4
 
 <br><br>
 
-## Public hosting
+## Public Hosting
 
 
 <br><br>
@@ -368,7 +391,7 @@ The products above all cover parts of the learning outcomes. Below a table summe
 
 | Outcome | Products |
 | --- | --- |
-|  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker) |
+|  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker), [API Documentation](#api-documentation) |
 |  2. Software quality: You use software tooling and methodology that continuously monitors and improve the software quality during software development.  | [Ordio API Microservice](#ordio-api-microservice), [API Gateway](#api-gateway), [GitHub](#github) |
 | 3. CI/CD: You implement a (semi)automated software release process that matches the needs of the project context. | [GitHub](#github), [Docker](#docker) |
-| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker) |
+| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation) |
