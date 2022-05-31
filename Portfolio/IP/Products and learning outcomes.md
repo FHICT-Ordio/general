@@ -4,17 +4,18 @@ In this document I will showcase the different products I have made during this 
 
 <br>
 
----
-
 ## Table of Content
 - [Ordio API application](#ordio-api-application)
-- [GitHub CI/CD](#github-cicd)
+- [GitHub](#github)
 - [Docker](#docker)
 - [API Documentation](#api-documentation)
 - [Ordio admin webtool](#ordio-admin-webtool)
 - [Auth0](#auth0)
 - [Public hosting](#public-hosting)
 - [Research](#research)
+
+[Learning Outcomes](#learning-outcomes)
+
 <br>
 ---
 <br>
@@ -91,6 +92,96 @@ The next step in the CI/CD process is one only executed for API microservice bra
 
 What if we could collect all these Swagger files and put them on one general branch then? We can! This step in the CI/CD process is responsible for exactly this: Whenever changes to an API microservice get pushed or merged to one of the repositories main branches, take said yaml file and push it to one main repository, where the independent files get combined into one Swagger interface: the Ordio Swagger portal. This page is hosted on GitHub where independent developers can use it to implement the API. The best part: Whenever any of the code of an API microservice changes, this Swagger portal also automatically updates the API definitions according to the current production code!
 
+
+<details>
+    <summary>GitHub CI/CD Flow File (yaml)</summary>
+
+``` yaml
+name: Main
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore "./menu-service/" 
+    - name: Build
+      run: dotnet build --no-restore "./menu-service/"
+    - name: Test
+      run: dotnet test --no-build --verbosity normal "./menu-service/"
+    - name: Upload documentation file
+      uses: actions/upload-artifact@v3
+      with:
+        name: docs
+        path: ./menu-service/menu-service/api-menu.yaml
+        retention-days: 1
+
+  deployment:
+    name: deployment
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ./menu-service/
+          file: ./menu-service/menu-service/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/menu-service:latest
+  
+  push-docs:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name != 'pull_request'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: FHICT-Ordio/general
+          token: ${{ secrets.PAT_TOKEN }}
+      
+      - name: Download docs artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: docs
+      
+      - name: Check Git status
+        id: check
+        run: echo "::set-output name=status::$(git status -s)"
+      
+      - name: Commit files
+        id: commit
+        if: steps.check.outputs.status != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Add changes"
+          git push
+
+```
+
+</details>
+
 <br>
 
 ### Security and code quality
@@ -102,6 +193,10 @@ CodeQL is a static code analysis tool integrated in GitHub. For my project I set
 - #### Dependabot
 The second technology I use to ensure safe code for production environments is Dependabot. Dependabot is another integrated GitHub tool that automatically scans used dependencies of applications and reports if it finds any possible vulnerabilities with these depenencies. All issues found are noted and reported to the brances Security panel, and if any of the vulnerabilities found are of High risk factor, the merge will be blocked until fixed or the merge is forced through. Furthermore, Dependabot will also automatically try to fix any vulnerabilities found by either automatically updating packages for you, or finding different similar packages to use instead.
 
+| CodeQL | Dependabot |
+| --- | ---- |
+| ![CodeQL](./Media/CodeQL.png) | ![Dependabot](./Media/Dependabot.png) |
+
 <br>
 
 ### Outcomes
@@ -110,6 +205,134 @@ This product touches learning outcome 2, 3, 4
 <br><br>
 
 ## Docker
+All the applications that are part of the Ordio platform run in a live server environment. This is not in independent single applications, but the entire platform runs in one Docker unit, split in multiple containers: one for each microservice and application.
+
+<br>
+
+### Containers
+In total, the platform runs using five unique containers. These containers are the following:
+
+- #### Menu service container
+This container hosts the Menu microservice, the API application described in [this](#ordio-api-microservice) chapter;
+
+- #### Admin client container
+This container hosts the Admin client application, the frontend application described in [this](#ordio-admin-webtool) chapter;
+
+- #### Gateway container
+This container hosts the API gateway application described in [this](#api-gateway) chapter;
+
+- #### Database container
+This container hosts the Ordio database. This is an MSSQL database which is responsible for storing all data the Ordio platform needs. The content of this database dynamically updates using Migrations whenever changes to the code structure are made;
+
+- #### Watchtower container
+To make sure all the containers stay up do date with the latest code on the main GitHub branches, I use an extension called Watchtower. Watchtower is a dockerised application running next to the other containers which on regular intervals checks if new images of the other appications have been pushed to DockerHub. If so, Watchtower wil automatically restart the container and pull the latest code to make sure the production environment always stays up to date;
+
+<br>
+
+### Compose
+All these different containers are started and managed using Docker compose. Docker compose offers great customization that allows for startup sequences to be predefined in contrary to the commands that usually have to individually be entered to start individual containers with vanila docker. In this compose file a few key components are specified:
+- Docker image to use for the container
+- Volumes for containers for permanent data storage (without, data gets reset on container restart)
+- Environmental variables for the container
+- Portbinding for container
+
+<details>
+    <summary>Docker Compose File (yaml)</summary>
+
+``` yaml
+version: "3.8"
+services:
+  # Support Services
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/timezone:/etc/timezone:ro
+    command: --interval 300
+  
+  gateway:
+    container_name: gateway
+    image: robinvhoof/api-gateway:latest
+    environment:
+      # Host Bindings
+      Kestrel__Endpoints__Http__Url: "http://+:2000"
+      Kestrel__Endpoints__Https__Url: "https://+:1000"
+      # SSL Bindings
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "letmein"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 8080:1000
+    networks:
+      - service-network
+  
+  # Data Services
+  db:
+    container_name: db
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+        SA_PASSWORD: "YjxFVK#C8kJZPk4l"
+        ACCEPT_EULA: "Y"
+    ports:
+      - 1433:1433
+    volumes:
+      - ./mssql:/var/opt/mssql/data
+    networks:
+      - service-network
+
+  # API Services
+  menu-service:
+    container_name: menu-service
+    image:  robinvhoof/menu-service:latest
+    environment:
+      # Connection String Injections
+      ConnectionStrings__MenuContext: "Server=db;Database=menu;User=sa;Password=YjxFVK#C8kJZPk4l;"
+      # Host Bindings
+      Kestrel__Endpoints__Http__Url: "http://+:2001"
+      Kestrel__Endpoints__Https__Url: "https://+:1001"
+      # SSL Bindings
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "letmein"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    ports:
+      - 1001:1001
+    depends_on:
+      - db
+      - gateway
+    networks:
+      - service-network
+
+  # Frontend Containers
+  admin-client:
+    container_name: admin-client
+    image: robinvhoof/admin-client:latest
+    environment:
+      # API Host Definitions
+      REACT_APP_API_URL: "https://robinvanhoof.tech:1000"
+      HTTPS: true
+    ports:
+      - 3000:3000
+
+# Networking
+networks:
+  service-network:
+    driver: bridge
+```
+
+</details>
+
+| Overview | Docker view |
+| --- | --- |
+| ![Container overview](./Media/Docker%20overview.png) | ![Docker view](./Media/Docker.png) |
+
+<br>
+
+### Outcomes
+This product touches learning outcome 1, 3, 4
 
 <br><br>
 
@@ -134,3 +357,18 @@ This product touches learning outcome 2, 3, 4
 <br><br>
 
 ## Research
+
+
+
+
+<br><br><br>
+
+# Learning Outcomes
+The products above all cover parts of the learning outcomes. Below a table summerizing all outcomes and products that show these outcomes:
+
+| Outcome | Products |
+| --- | --- |
+|  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker) |
+|  2. Software quality: You use software tooling and methodology that continuously monitors and improve the software quality during software development.  | [Ordio API Microservice](#ordio-api-microservice), [API Gateway](#api-gateway), [GitHub](#github) |
+| 3. CI/CD: You implement a (semi)automated software release process that matches the needs of the project context. | [GitHub](#github), [Docker](#docker) |
+| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker) |
