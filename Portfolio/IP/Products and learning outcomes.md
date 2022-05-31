@@ -16,9 +16,7 @@ In this document I will showcase the different products I have made during this 
 
 [Learning Outcomes](#learning-outcomes)
 
-<br>
----
-<br>
+<br><br>
 
 ## Ordio API microservice
 The first major product I have made for this project is the main API backend application that feeds the entire Ordio platform with all its data. This API containst two kinds of endpoints meant for two different purposes: Secured and Public access points. 
@@ -46,7 +44,7 @@ Here follows a quick video demonstration of the API. Postman is used to make the
 <br>
 
 ### Outcomes
-This product touches learning outcome 1 and 2
+This product touches learning outcomes 1 and 2
 
 <br><br>
 
@@ -67,7 +65,7 @@ What you can see in this diagram is the simulated path two requests from clients
 <br>
 
 ### Outcomes
-This product touches learning outcome 1, 2 and 4
+This product touches learning outcomes 1, 2 and 4
 
 <br><br>
 
@@ -200,7 +198,7 @@ The second technology I use to ensure safe code for production environments is D
 <br>
 
 ### Outcomes
-This product touches learning outcome 2, 3, 4
+This product touches learning outcomes 2, 3 and 4
 
 <br><br>
 
@@ -213,13 +211,13 @@ All the applications that are part of the Ordio platform run in a live server en
 In total, the platform runs using five unique containers. These containers are the following:
 
 - #### Menu service container
-This container hosts the Menu microservice, the API application described in [this](#ordio-api-microservice) chapter;
+This container hosts the Menu microservice, the API application described in the [Ordio API Micoservice](#ordio-api-microservice) chapter;
 
 - #### Admin client container
-This container hosts the Admin client application, the frontend application described in [this](#ordio-admin-webtool) chapter;
+This container hosts the Admin client application, the frontend application described in [Ordio Admin Webtool](#ordio-admin-webtool) chapter;
 
 - #### Gateway container
-This container hosts the API gateway application described in [this](#api-gateway) chapter;
+This container hosts the API gateway application described in [API Gateway](#api-gateway) chapter;
 
 - #### Database container
 This container hosts the Ordio database. This is an MSSQL database which is responsible for storing all data the Ordio platform needs. The content of this database dynamically updates using Migrations whenever changes to the code structure are made;
@@ -332,7 +330,7 @@ networks:
 <br>
 
 ### Outcomes
-This product touches learning outcome 1, 3, 4
+This product touches learning outcomes 1, 3 and 4
 
 <br><br>
 
@@ -341,36 +339,68 @@ Because of the nature of the Ordio platform being a portal for fellow developers
 
 <br>
 
-### Swagger
-The first major component of the API documentation is the Swagger Portal. This Swagger Portal is one place where all the current and future API endpoint are and will be documenten. The endpoint definitions here are set up to be automatically generated from the live code and set to update whenever changes to this live code happend.
+### Swagger portal
+The first major component of the API documentation is the Swagger portal. This Swagger portal is one place where all the current and future API endpoint are and will be documenten. The endpoint definitions here are set up to be automatically generated from the live code and set to update whenever changes to this live code happend.
 
-Furthermore, the Swagger Portal also offers the tools to directly make calls to either the live production servers or a local test server, which can be used to play around with and test the endpoints. 
+Furthermore, the Swagger portal also offers the tools to directly make calls to either the live production servers or a local test server, which can be used to play around with and test the endpoints. 
 
-The portal itself runs on a GitHub pag and doesnt depend on the APIs or other parts of the platform. This means that even if the APIs were to temporarily go down, developers could still use the information from the Portal to write their code. Take a look at the portal [here](https://fhict-ordio.github.io/general/).
+The portal itself runs on a GitHub pag and doesnt depend on the APIs or other parts of the platform. This means that even if the APIs were to temporarily go down, developers could still use the information from the portal to write their code. 
+
+> The Swagger portal can be found [here](https://fhict-ordio.github.io/general/).
 
 ![Swagger](./Media/Swagger.png)
 
 <br>
 
 ### Developer Notes
-Beside the documentation the Swagger Portal provides more documentation about the API for developers can be found on the Admin Webtool which will be talked about later in the [Ordio Admin Webtool](#ordio-admin-webtool) chapter. The Admin Webtool site has a developer section providing developers with in detail epxplainations on what endpoints to use for what purposes, how to use them, and in addition also giving you JavaScript and C# past-and-go code snippets for general API calls, and endpoint-specific API calls. This developer section can be found [here](https://robinvanhoof.tech/development).
+Beside the documentation the Swagger Portal provides more documentation about the API for developers can be found on the Admin Webtool which will be talked about later in the [Ordio Admin Webtool](#ordio-admin-webtool) chapter. The Admin Webtool site has a developer section providing developers with in detail epxplainations on what endpoints to use for what purposes, how to use them, and in addition also giving you JavaScript and C# past-and-go code snippets for general API calls, and endpoint-specific API calls. 
+
+
+> This developer page can be found [here](https://robinvanhoof.tech/development).
 
 ![Developer page](./Media/Developer%20page.png)
 
 <br>
 
 ### Outcomes
-This product touches learning outcome 1, 4
+This product touches learning outcomes 1 and 4
 
 <br><br>
 
 ## Ordio Admin Webtool
+The Admin Webtool is the main in-house frontend application of the Ordio platform. This web application integrates both Auth0 (which will be talked more about in the [Auth0]) and The Ordio API to function as a CRUD frontend that restaurant owners can use to create and minipulate their menus. Once a menu is created, the restaurant owner can request a menu token through the Admin Webtool that can be used to retreive the public menus with all sensitive data stripped through the public endpoints. External developers can make use of these tokens to determine what menu to import and display depending on what menu token was provided. 
+
+The intergration of Auth0 priveds a safe and secure way for users to log in and makes sure only the owners of menus can edit their own menus. Login tokens or credentials are never stored nor client nor server sided making this login process very secure and reliable. Furthermore, any user data that is stored on the server side (like Auth0 user IDs) are always hashed using SHA256 hashing algorithms making it exponentially harder to do anything usefull with this information might it be leaked or access in some other way.
+
+> The live production version of the Ordio Admin Webtool can be found [here](https://robinvanhoof.tech/).
+
+![Demonstration](./Media/Ordio%20Admin%20Webtool.gif)
+
+<br>
+
+### Outcomes
+This product touches learning outcome 1
 
 
 <br><br>
 
 ## Auth0
+Auth0 is the second Microservice used in the Ordio platform. Auth0 is an external microservice that takes the responsibilty of user authorization and handels this in a very secure and safe way. The platform is widely used in the entire industry, even in many big applications and companies. 
 
+Both the API application and Admin Webtool integrate Auth0 in two different ways: The API application integrates Auth0 to check the validity of supplied tokens and request user information using the tokens while the Admin Webtool integrates Auth0 to create login pages for the site and provide the site with user tokens that can be send with API request to authorize and identify what user made the request. 
+
+<br>
+
+While setting up the Auth0 services I ran into some major issues that sparked the idea for a Research topic for this project which will be discussed later in the [Research](#research) chapter.
+
+| Auth0 Login ||
+| --- | --- |
+| ![Login](./Media/Auth0%20Login.PNG) | ![Activity](./Media/Auth0%20Activity.PNG) |
+
+<br>
+
+### Outcomes
+This product touches learning outcome 1 and 4
 
 <br><br>
 
@@ -391,7 +421,7 @@ The products above all cover parts of the learning outcomes. Below a table summe
 
 | Outcome | Products |
 | --- | --- |
-|  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker), [API Documentation](#api-documentation) |
+|  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker), [API Documentation](#api-documentation), [Ordio Admin Webtool](#ordio-admin-webtool), [Auth0](#auth0) |
 |  2. Software quality: You use software tooling and methodology that continuously monitors and improve the software quality during software development.  | [Ordio API Microservice](#ordio-api-microservice), [API Gateway](#api-gateway), [GitHub](#github) |
 | 3. CI/CD: You implement a (semi)automated software release process that matches the needs of the project context. | [GitHub](#github), [Docker](#docker) |
-| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation) |
+| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation), [Auth0](#auth0) |
