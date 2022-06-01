@@ -12,7 +12,6 @@ In this document I will showcase the different products I have made during this 
 - [Ordio admin webtool](#ordio-admin-webtool)
 - [Auth0](#auth0)
 - [Public hosting](#public-hosting)
-- [Research](#research)
 
 [Learning Outcomes](#learning-outcomes)
 
@@ -40,6 +39,8 @@ To make it easy to access the API endpoints and make future expansion through mo
 
 ### Demonstration
 Here follows a quick video demonstration of the API. Postman is used to make the API calls for demonstration purposes
+
+![Postman Demo](./Media/Postmen%20Demo.gif)
 
 <br>
 
@@ -335,7 +336,7 @@ This product touches learning outcomes 1, 3 and 4
 <br><br>
 
 ## API Documentation
-Because of the nature of the Ordio platform being a portal for fellow developers to build upon using the APIs, the API documentation is a very big vital part of making sure the project stays alive: Without clear documentation on how to use it, there's no point in keeping the service running if no one knows what to do with it. This is why I put a lot of time into geting the API documentation to a high level which will also be touched upon in my research later in the [Research](#research) chapter.
+Because of the nature of the Ordio platform being a portal for fellow developers to build upon using the APIs, the API documentation is a very big vital part of making sure the project stays alive: Without clear documentation on how to use it, there's no point in keeping the service running if no one knows what to do with it. This is why I put a lot of time into geting the API documentation to a high level which will also be touched upon in one of my Research topics.
 
 <br>
 
@@ -391,7 +392,7 @@ Both the API application and Admin Webtool integrate Auth0 in two different ways
 
 <br>
 
-While setting up the Auth0 services I ran into some major issues that sparked the idea for a Research topic for this project which will be discussed later in the [Research](#research) chapter.
+While setting up the Auth0 services I ran into some major issues that sparked the idea for a Research topic for this project.
 
 | Auth0 Login ||
 | --- | --- |
@@ -440,13 +441,6 @@ The last step in publishing the Ordio platform was setting up DNS records for th
 
 ### Outcomes
 This product touches learning outcome 1 and 4
-
-<br><br>
-
-## Research
-
-
-
 
 <br><br><br>
 
