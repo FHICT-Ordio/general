@@ -1,4 +1,4 @@
-# Backend platform research
+# Backend Platform Research
 
 Currently theres two viable options for creating the backend API part of the Ordio Project: JavaScript using Node.js and C# using ASP.NET.
 

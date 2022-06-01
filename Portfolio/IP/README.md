@@ -4,4 +4,4 @@
 Whe individual part of my portfolio are split up into a few different categories. These categories are the following:
 - My [products and learning outcome](./Products%20and%20learning%20outcomes.md) definitions for this project;
 - My [documentation]() for this project;
-- My [researches]() for this project;
+- My [researches](https://github.com/FHICT-Ordio/general/tree/main/Portfolio/IP/Research) for this project;

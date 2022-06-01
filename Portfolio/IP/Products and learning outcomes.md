@@ -1,4 +1,4 @@
-# Products and learning outcomes
+# Products and Learning Outcomes
 
 In this document I will showcase the different products I have made during this project, and explain what parts of my deliver cover what outcomes.
 
@@ -183,7 +183,7 @@ jobs:
 
 <br>
 
-### Security and code quality
+### Security and quality assurance
 GitHub also provides very useful tools to analyse your code and make sure no vulnerabilities slip through the cracks. My project uses two major technologies that check and notify about exactly this. These are also part of the CI/CD process. These technologies are the following:
 
 - #### CodeQL
