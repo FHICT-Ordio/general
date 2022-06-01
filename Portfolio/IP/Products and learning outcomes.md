@@ -405,7 +405,41 @@ This product touches learning outcome 1 and 4
 <br><br>
 
 ## Public Hosting
+Because Ordio is an API platform for external developers to build their applications upon, public hosting is a very important step for my project, which is why I spend a lot of time into this working properly. I took a few big steps in making public hosting possible:
 
+<br>
+
+- ### Exposing Application
+The first step in publishing the Ordio platform is to make an outside connection to both the API and frontend possible. This is done by first of all exposing the different docker containers to the host system through port binding, and exposing the host system to the public through ipforwarding. Using this I made my applications publicly accessible. This set up in the following way
+
+![Network overview](./Media/Network%20overview.PNG)
+
+<br>
+
+- ### SSL
+The next step was setting up SSL certificates for both the API and Admin Webtool. This step might seem abundant as hosting sites over SSL would not seem necessary, but there are however two reasons why it is required:
+
+> - #### Auth0
+> The frontend Admin Webtool uses Auth0 for authorizing users. However, if hosted outside of a "localhost" environment Auth0 <b>requires</b> any applications running it to run over a secured HTTPS connection. If an application is not, Auth0 will not work.
+
+<br>
+
+> - #### Loading non HTTPS into HTTPS
+> The second reason is that a lot of browsers dont allow pages to load non-secure sources into secured pages. This means that if the API does not run on HTTPS, the API cannot be called by other sites that do run HTTPS. Since te frontend is required to run on HTTPS becouse of the previous reason, the API also needs to run over a secured connection.
+
+Initially, a self-signed developer SSL certificate was set up for three services: The Admin Webtool frontend, the API Gateway and the Menu service. However, a DNS was setup up later (Will will be talked about more below) making use of an official SSL certificate from a Certificate Authority possible. I aquired one through Let's Encrypt and applied this one to the above-mentioned pages. This process is further detailed in one of my Research topics.
+
+![Lets Encrypt](./Media/SSL%20Lets%20Encrypt.PNG)
+
+<br>
+
+- ### DNS
+The last step in publishing the Ordio platform was setting up DNS records for the domain. A DNS allows users to put a custom URL into the adress bar instead of the IP of the host. I bought a custom domain for this [www.robinvanhoof.tech](https://robinvanhoof.tech/) which now hosts the Ordio platform, making it more accessible for developers and users alike
+
+<br>
+
+### Outcomes
+This product touches learning outcome 1 and 4
 
 <br><br>
 
@@ -421,7 +455,7 @@ The products above all cover parts of the learning outcomes. Below a table summe
 
 | Outcome | Products |
 | --- | --- |
-|  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker), [API Documentation](#api-documentation), [Ordio Admin Webtool](#ordio-admin-webtool), [Auth0](#auth0) |
+|  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker), [API Documentation](#api-documentation), [Ordio Admin Webtool](#ordio-admin-webtool), [Auth0](#auth0), [Public Hosting](#public-hosting) |
 |  2. Software quality: You use software tooling and methodology that continuously monitors and improve the software quality during software development.  | [Ordio API Microservice](#ordio-api-microservice), [API Gateway](#api-gateway), [GitHub](#github) |
 | 3. CI/CD: You implement a (semi)automated software release process that matches the needs of the project context. | [GitHub](#github), [Docker](#docker) |
-| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation), [Auth0](#auth0) |
+| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation), [Auth0](#auth0), [Public Hosting](#public-hosting) |
