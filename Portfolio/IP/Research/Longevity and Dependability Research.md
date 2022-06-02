@@ -7,7 +7,7 @@ Parts of this research were made with cooperation of third parties. I would like
 
 > Jeffrey Derksen, Software Engineer
 
-For their involvement as external software developer as testgroup for this research
+For their involvement as external software developer as testgroup for this research.
 
 <br>
 
@@ -25,13 +25,14 @@ For their involvement as proof-reader for this report.
 
 ## Table of content
 - [Acknowledgements ](#acknowledgements)
-- [Summary]()
-- [Acronyms]()
-- [Introduction]()
-- [Methodology]()
-- [Results]()
-- [References]()
-- [Appendices]()
+- [Summary](#summary)
+- [Acronyms](#acronyms)
+- [Introduction](#introductions)
+- [Methodology](#methodology)
+- [Results](#results)
+- [References](#references)
+- [Appendices](#appendices)
+- [Tables](#tables)
 
 <br><br>
 
@@ -61,7 +62,7 @@ Because of its nature Ordio is not a very powerfull platform on its own. What gi
 ## Methodology
 This research will take a better look into difficulty of integrating the Ordio platform into new applications for external developers with the provided documentation. The main research question is as following:
 
-> How independent is the Ordio platform 
+> How independent is the Ordio platform and how does this bode for the longevity of the platform?
 
 <br>
 
@@ -87,14 +88,97 @@ This research was conducting using the DOT framework (<b>D</b>evelopment <b>O</b
 | <b>(3)</b> How difficult is the implementation process of Ordio for external developers with the given documentation? | Workshop- and Field-research |
 | <b>(4)</b> How much extra communication between in-house and external developers besides the public documentation is needed to comfortably implement Ordio into a new application? | Workshop-research |
 
+<br>
+
+### Instruments
+To cunduct and manage this research a number of instruments are used. These are the following:
+
+- Questionnaire
+
+In this research a questionnaire will be used to get an insight into the difficulty of implementing the Ordio platform into a new application by external developers. This questionnaire will be filled in by our testgroup. A copy of the questionnaire is included in appendice [A.1C](#appendices).
+
+- Timelog
+
+I this research a timelog will be used to get an insight into the time external developes need to learn how to use and implement the Ordio platform into their application. This timelog will be filled in by the testgroep. A copy of the timelog is included in appendice [A.1B](#appendices).
+
+- Communicationlog
+
+In this research a communicationlog will be used to get an insight into the amount of extra communication required besides the public documentation for an external developer to make an integration of the Ordio platform into their application. This log will document when communication takes place, how long the conversation lasts and what is discussed in this conversation. A copy of the communicationlog can be found in appendice [A.1C](#appendices). 
+
+<br>
+
+### Testgroup
+To conduct this research an implementation of an application using the Ordio application needs to actually be developed. This is a very time-consuming task which makes conducting this research on a large testgroup impractical due to a lack of fund and time.
+
+For this reason a testgroup of one singular developer will be used to conduct this research. All gathered data will come from this one developer. The selection of this developer is not on random basis but will be picked from a close environment with a background in (web)development but <b>no</b> experience with the Ordio platform.
+
+<br>
+
+### Datacollection
+This research will collect two main points of data: The time it takes for a developer to implement the Ordio platform into their application and the difficulty of executing this task. Throughout the entire development process a digital timelog will be used by the testgroup to gather data about time consumption. A digital questionnaire will be filled in at the end of the development stage by the testgroup to gather data about difficulty of implementation.
+
+<br>
+
+### Limitations
+This research has a few limitations it might run into. The biggest limitation is the small testgroup. Due to the amount of time needed to develop an implementation required of every individual testgroup-member it is very unrealistic to take a bigger testgroup. This small testgroup can influece the result of the research.
+
+Second of all, the fact that the single testgroup developer that was chosen from close environment can introduce possible limitations: It is possible that prior knowledge of the Ordio platform is present through hearsay which means more knowledge then the average developer about the platform is present, possible clouding the result of the research.
+
 <br><br>
 
 ## Results
+> ### What documentation does an external developer need to implement the Ordio platform into a new application?
+
+<br>
+
+Test
+
+<br><br>
+
+> ### How much time does an external developer need to learn how to use and implement the Ordio platform in 0their application with the given documentation?
+
+<br>
+
+Test
+
+<br><br>
+
+> ### How difficult is the implementation process of Ordio for external developers with the given documentation?
+
+<br>
+
+Test
+
+<br><br>
+
+> ### How much extra communication between in-house and external developers besides the public documentation is needed to comfortably implement Ordio into a new application?
+
+<br>
+
+To determine the amount of extra communication needed between te testgroup and in-house developers all communication relating to the implementation of the Ordio platform will be documented over the course of this research. All the collected data from the testgroup is documented in table [T.A1](#tables). From this information the following conclusions can be drawn:
+
 
 <br><br>
 
 ## References
+> Marcelmeesters and various authors. (2018, February 9). <i>The DOT Framework</i>. Retreived May 30, 2022, from WikiText: https://ictresearchmethods.nl/The_DOT_Framework
 
 <br><br>
 
 ## Appendices
+> ### A.1A - Copy of the timelog
+![Coppy Timelog](./Media/Copy%20Timetable.PNG)
+
+<br>
+
+> ### A.1B - Copy of the questionnaire
+![Copy Questionnaire](./Media/Copy%20Questionnaire.png)
+
+<br>
+
+> ### A.1C - Copy of the communicationlog
+![Copy Communicationlog](./Media/Copy%20Communicationlog%20.PNG)
+
+<br><br>
+
+## Tables
