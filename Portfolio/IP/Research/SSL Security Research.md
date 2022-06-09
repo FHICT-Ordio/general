@@ -123,6 +123,8 @@ A second mejor advantages of running your web application on HTTPS is loading co
 - #### External services
 Thirdly, when using many external (API) services a HTTPS host is required to even make use of them if hosted on a live environment outside of localhost. A good example of this is Auth0, which was also the inital reason why I started this research. Auth0 requires a secured client to host connection to make use of the Auth0 service possible on any host-environment outside of localhost. 
 
+<br>
+
 - #### Search engine priority
 Forth, search engine like google actually give sites that use SSL and secured connections priority over non-secured HTTP web applications. This mainly applies to website applications, but is a very important aspect for for publisity.
 
