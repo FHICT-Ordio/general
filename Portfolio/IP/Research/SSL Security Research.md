@@ -6,6 +6,7 @@ This documentent contains the SSL Security Research conducted for my individual 
 ## Table of Contents
 - [Acronyms](#acronyms)
 - [Introduction](#introduction)
+- [Summary](#summary)
 - [Methodology](#methodology)
 - [Results](#results)
 - [References](#references)
@@ -19,6 +20,11 @@ This documentent contains the SSL Security Research conducted for my individual 
 | HTTP | Hyper Text Transfer Protocol, the standard transfer protocol for web applications |
 | HTTPS | Secured Hyper Text Transfer Protocol, similar to HTTP, however extra security measurements are included in this transfer protocol |
 | DNS | Domain Name System, a service to map a url aka domain (for example robinvanhoof.tech) to a public IP address (86.92.40.132) |
+
+<br><br>
+
+## Summary
+This research was about understand what SSL certificats are but most importantly how to apply SSL certificates to dockerized applications. The result is of this research is summerized and further explained in a public step by step tutorial video that can be used by fellow software developers to apply SSL certificates in their dockerized applications. This video can be found on Youtube [here](https://www.youtube.com/watch?v=e2L1VM-Z6_U).
 
 <br><br>
 
@@ -116,6 +122,9 @@ A second mejor advantages of running your web application on HTTPS is loading co
 
 - #### External services
 Thirdly, when using many external (API) services a HTTPS host is required to even make use of them if hosted on a live environment outside of localhost. A good example of this is Auth0, which was also the inital reason why I started this research. Auth0 requires a secured client to host connection to make use of the Auth0 service possible on any host-environment outside of localhost. 
+
+- #### Search engine priority
+Forth, search engine like google actually give sites that use SSL and secured connections priority over non-secured HTTP web applications. This mainly applies to website applications, but is a very important aspect for for publisity.
 
 <br><br>
 
