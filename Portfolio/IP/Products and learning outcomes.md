@@ -18,7 +18,7 @@ In this document I will showcase the different products I have made during this 
 <br><br>
 
 ## Ordio API microservice
-The first major product I have made for this project is the main API backend application that feeds the entire Ordio platform with all its data. This API containst two kinds of endpoints meant for two different purposes: Secured and Public access points. 
+The first major product I have made for this project is the main API backend application that feeds the entire Ordio platform with all its data. This API containst two kinds of endpoints meant for two different purposes: Secured and Public access points. I decided to split these up becouse different application-integrations of the API require different levels of credentials. To make sure developers can make implementations where authorization is not at all required the enpdoints have been split in two categories. In turn, this also means the authorization-platform-details will not have to be publically accessible for external developers to work with Ordio.
 
 ### Secure access points
 The first kind of access point are secure access points. These are any access points that require authorization through Auth0 (which will be touched upon later in the [Auth0](#auth0) chapter). These access points are most of the CRUA access points for the data and are mainly meant to only be accessed by authorized services. These access points provide authorized developers the possibility to manipulate the stored data through API calls.
@@ -38,7 +38,7 @@ To make it easy to access the API endpoints and make future expansion through mo
 <br>
 
 ### Demonstration
-Here follows a quick video demonstration of the API. Postman is used to make the API calls for demonstration purposes
+Here follows a quick video demonstration of the API. Postman is used to make the API calls for demonstration purposes.
 
 ![Postman Demo](./Media/Postmen%20Demo.gif)
 
@@ -54,6 +54,8 @@ As touched upon earlier, all the Ordio endpoints are not publically accessible. 
 - All API access points are accessible through the same hostname;
 - Adding new microservices is easy as new routes can easily be defined in the gateway;
 - The gateway allows for call-throttling, DDOS protection and other integrated security protections;
+
+The reason why I decided to go for an API gateway was because of two major key parts: First of all, all above given advantages an API gateway offers, but also because I want Ordio to be a scalable and proffesionaly build platform. Making use of an API gateway is the key to exactly this.
 
 <br>
 
@@ -187,7 +189,7 @@ jobs:
 GitHub also provides very useful tools to analyse your code and make sure no vulnerabilities slip through the cracks. My project uses two major technologies that check and notify about exactly this. These are also part of the CI/CD process. These technologies are the following:
 
 - #### CodeQL
-CodeQL is a static code analysis tool integrated in GitHub. For my project I set up CodeQL so that whenever a merge request onto any of the main branches is made, GitHub will first check the code quality and vulnerabilities before allowing said code to be pushed at all. Any vulnerabilities are noted and reported to the branches Security panel. If any of the vulnerabilities found are of High risk factor, the merge will be blocked until the vulnerabilities are fixed or the merge is forced through.
+CodeQL is a static code analysis tool integrated in GitHub. For my project I set up CodeQL so that whenever a merge request onto any of the main branches is made, GitHub will first check the code quality and vulnerabilities before allowing said code to be pushed at all. Any vulnerabilities are noted and reported to the branches Security panel. If any of the vulnerabilities found are of High risk factor, the merge will be blocked until the vulnerabilities are fixed or the merge is forced through. I decided to use CodeQL as main static code analysis tool for one major reason: This tool is natively offered by GitHub, meaning its widely used and we can assume very accurate and secure.
 
 - #### Dependabot
 The second technology I use to ensure safe code for production environments is Dependabot. Dependabot is another integrated GitHub tool that automatically scans used dependencies of applications and reports if it finds any possible vulnerabilities with these depenencies. All issues found are noted and reported to the brances Security panel, and if any of the vulnerabilities found are of High risk factor, the merge will be blocked until fixed or the merge is forced through. Furthermore, Dependabot will also automatically try to fix any vulnerabilities found by either automatically updating packages for you, or finding different similar packages to use instead.
@@ -231,7 +233,7 @@ To make sure all the containers stay up do date with the latest code on the main
 ### Compose
 All these different containers are started and managed using Docker compose. Docker compose offers great customization that allows for startup sequences to be predefined in contrary to the commands that usually have to individually be entered to start individual containers with vanila docker. In this compose file a few key components are specified:
 - Docker image to use for the container
-- Volumes for containers for permanent data storage (without, data gets reset on container restart)
+- Volumes for containers for permanent data storage (without these volumes data gets reset on container restart)
 - Environmental variables for the container
 - Portbinding for container
 
@@ -389,6 +391,8 @@ This product touches learning outcome 1
 Auth0 is the second Microservice used in the Ordio platform. Auth0 is an external microservice that takes the responsibilty of user authorization and handels this in a very secure and safe way. The platform is widely used in the entire industry, even in many big applications and companies. 
 
 Both the API application and Admin Webtool integrate Auth0 in two different ways: The API application integrates Auth0 to check the validity of supplied tokens and request user information using the tokens while the Admin Webtool integrates Auth0 to create login pages for the site and provide the site with user tokens that can be send with API request to authorize and identify what user made the request. 
+
+I decided to use Auth0 for authorization service over other similar services because Auth0 is a industry-wide accepted standard and used by many big developers and companies. Furthermore, Auth0's main edge over other competitors its the documentation and step-by-step installation guides they offer, which other platforms like for exaple JumpCloud dont offer.
 
 <br>
 

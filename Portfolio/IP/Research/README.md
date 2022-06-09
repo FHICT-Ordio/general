@@ -3,5 +3,5 @@
 
 This folder contains all the research conducted for this project. I have done three research topics. These are the following:
 - [Backend framework](./Backend%20Framework%20Research.md) research
-- [Project longevity and dependability]() research
-- [SSL security]() research
+- [Project dependability and longevity](./Dependability%20and%20Longevity%20Research.md) research
+- [SSL security](./SSL%20Security%20Research.md) research

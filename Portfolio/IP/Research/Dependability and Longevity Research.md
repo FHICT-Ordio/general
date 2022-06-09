@@ -1,4 +1,4 @@
-# Longevity and Dependability Research
+# Dependability and Longevity Research
 
 ## Acknowledgements
 Parts of this research were made with cooperation of third parties. I would like to thank the following people for their contributions:
@@ -60,7 +60,7 @@ Because of its nature Ordio is not a very powerfull platform on its own. What gi
 <br><br>
 
 ## Methodology
-This research will take a better look into difficulty of integrating the Ordio platform into new applications for external developers with the provided documentation. The main research question is as following:
+This research will take a better look into difficulty of integrating the Ordio platform into new applications for external developers with the provided documentation. The main research question is as follows:
 
 > How independent is the Ordio platform and how does this bode for the longevity of the platform?
 
@@ -83,7 +83,7 @@ This research was conducting using the DOT framework (<b>D</b>evelopment <b>O</b
 
 | Research Question | Research Strategy |
 | --- | --- |
-| <b>(1)</b> What documentation does an external developer need to implement the Ordio platform into a new application? | Library-, Showroom- and Workshop-research |
+| <b>(1)</b> What form of documentation does an external developer need to implement the Ordio platform into a new application? | Library-, Showroom- and Workshop-research |
 | <b>(2)</b> How much time does an external developer need to learn how to use and implement the Ordio platform in their application with the given documentation? | Workshop-research |
 | <b>(3)</b> How difficult is the implementation process of Ordio for external developers with the given documentation? | Workshop- and Field-research |
 | <b>(4)</b> How much extra communication between in-house and external developers besides the public documentation is needed to comfortably implement Ordio into a new application? | Workshop-research |
@@ -127,15 +127,77 @@ Second of all, the fact that the single testgroup developer that was chosen from
 <br><br>
 
 ## Results
-> ### What documentation does an external developer need to implement the Ordio platform into a new application?
+> ### What form of documentation does an external developer need to implement the Ordio platform into a new application?
 
 <br>
 
-Test
+Before setting the testgroup out to develop applications with an implementation of the Ordio platform documentation that specifies how the platform should be used needs to be written. This brings up the following question: What documentation do developers need to make said implementation?
+
+To determine this I started a research detailing what would be needed to comfortably achieve this goal. I started by looking at other platforms that provide developers with similar services and looked into what these platforms offered their developers. I looked into the following services:
+
+<br>
+
+- Auth0
+
+Auth0 is a service that provides authorization features to devlopers to use in their front- and backend projects. This works through means of a public API that can be called upon to do multiple actions, from retreiving user-authorization tokens to validating tokens and retreiving userdata.
+
+Auth0 conveys the usage of their API to developers using two platforms. The first platform is their custom made [documentation wiki](https://auth0.com/docs/api/authentication) that documents in-depth all the inner workings of the standalone API. This wiki is very in-depth containing over 50 pages filled with documentation.
+
+The second platform Auth0 offers is directly integrated into their administration panel. This administration panel is a place for developers to set up their Tannents in the first place, meaning its very easy to find. The documentation given here is done in a more narrow form, focussing on specifically quickly integrating the authorization process into both front- and backend applications. This platform provied the developer with custom paste-and-go code snippets in many programming languages that make integrating the API an extremely easy and pleasant process.
+
+| Auth0 Wiki | Step by step snippet guide |
+| --- | --- |
+| ![Auth0 Wiki](./Media/Auth0%20Wiki.PNG) | ![Auth0 Snippet Guide](./Media/Auth0%20Snippet%20Guide.PNG) |
+<br>
+
+- Magento
+
+Magento is a service that provides developers with easy to use databases. The main access point for these databases is not through SQL but instead through a variety of CRUD API access points. Magento offers documentation about this API on two platforms:
+
+The first platform is a [Magento Wiki](https://devdocs.magento.com/guides/v2.4/rest/generate-local.html) fairly simmilar to the Auth0 Wiki and provides in depth documentation on the inner workings of the API. This Wiki addresses all endpoints, how to use them, what they return and what happens if something goes wrong.
+
+The second platform Megento offers is a live Swagger environment. This swagger environment is a swagger page that gets hosted along every instance of database and documents all installed accesspoints (uncluding access points installed through extensions) for developers to use. An example of this swagger enviornment can be found [here](https://www.toprc.nl/swagger).
+
+| Magento Wiki | Magento swagger environment |
+| --- | --- |
+| ![Magento Wiki](./Media/Magento%20Wiki.PNG) | ![Magento Swagger](./Media/Magento%20Swagger.PNG) |
+
+<br>
+
+- Twitch
+
+Twitch is an open broadcasting platform thats mainly used by gamers to livestream games. However, Twitch also offers a massive API service that provides external sources with a lot of information about their platform and users.
+
+Twitch uses one big platform to convey documentation about their API platform to developers. This is a big [Wiki](https://dev.twitch.tv/docs/) very similar to the Wikis from both Auth0 and Magento. This Wiki provides information on how to use all their access points, what responses to expect and details all processes around the API including for example requesting API keys.
+
+![Twitch Wiki](./Media/Twitch%20Wiki.PNG)
+
+<br>
+
+After looking at the mentioned sources I concluded that all these platforms have one thing in common: They all contain extensive Wikis documenting exactly how to use the APIs and environments around them for developing purposes. Furthermore, during this project and in previous projects I have worked with all three these APIs and their documentations. Every platform has their own strenghts and weaknesses:
+
+| Platform | Strenghts | Weaknesses |
+| --- | --- | --- |
+| Wiki-format | Provides an extreme amount of information, navigation to specific topics is very easy | Very time consuming to set up and maintain, mostly usefull for very big APIs and applications |
+| Swagger environment | Gives possibility of dynamically generating documentation, very low maintenance | Need to run on independent server or service, though endpoints can very well-documentend it cannont give information about the context around the API application (eg providing login or requesting API keys) |
+| Step-by-step snipet guide | Very usefull for quick development implementation, can take a lot of work away from the developer if set up correctly | In case the API ever changes all code snippets need to be rewritten or updated, although low maintance the setup requires a lot of resources |
+
+<br>
+
+To define what type of documentation would be most applicable to the Ordio platoform we first need to determine what aspects are important. First of all, we want a documentation solution that is rather quick to set up becouse of time constraints. Second of all, we have a rather small-scaled application meaning we dont need expansive documentation as there is not that much to document in the first place. Third of all, we want a documentation platform that provides developers with the posibility to very quickly implement the API and build on from that.
+
+<br>
+
+Taking the above mentioned aspects in mind, a conclusion can be drawn. Since the scale of the application is not big enough to wirte extensive in depth documentation for, a Wiki-format platform would be to big of a platform for the Ordio platform. This leaves Swagger and Step-by-step guides. On their own neither of these can provide a full picture of the API and its context. However, together these two would form a powerful tool that can cover all basis of the application and in addition give developer the tools to implement the API in mere minutes as reusable code snippets can be provided through this guide.
+
+<br>
+That brings us back to the main question: <i>What documentation does an external developer need to implement the Ordio platform into a new application?</i>
+
+A combination of Swagger endpoint documentation and a Step-by-step implementation guide.
 
 <br><br>
 
-> ### How much time does an external developer need to learn how to use and implement the Ordio platform in 0their application with the given documentation?
+> ### How much time does an external developer need to learn how to use and implement the Ordio platform in their application with the given documentation?
 
 <br>
 
