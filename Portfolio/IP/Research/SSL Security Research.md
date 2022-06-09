@@ -24,7 +24,7 @@ This documentent contains the SSL Security Research conducted for my individual 
 <br><br>
 
 ## Summary
-This research was about understand what SSL certificats are but most importantly how to apply SSL certificates to dockerized applications. The result is of this research is summerized and further explained in a public step by step tutorial video that can be used by fellow software developers to apply SSL certificates in their dockerized applications. This video can be found on Youtube [here](https://www.youtube.com/watch?v=e2L1VM-Z6_U).
+This research was about understand what SSL certificats are but most importantly how to apply SSL certificates to dockerized applications. The result is of this research is summerized and further explained in a public step by step tutorial video that can be used by fellow software developers to apply SSL certificates in their dockerized applications. This video can be found on Youtube [here](https://www.youtube.com/).
 
 <br><br>
 
