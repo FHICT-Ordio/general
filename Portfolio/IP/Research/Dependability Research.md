@@ -1,4 +1,4 @@
-# Dependability and Longevity Research
+# Dependability Research
 
 ## Acknowledgements
 Parts of this research were made with cooperation of third parties. I would like to thank the following people for their contributions:
@@ -37,6 +37,11 @@ For their involvement as proof-reader for this report.
 <br><br>
 
 ## Summary
+This research looks into the dependability of the platform I developed named "Ordio". To determine this, I looked into the difficulty of implementing the platform into applications by external developers using only publically accessible documentation.
+
+<br>
+
+This research showed that implementing the Ordio platform was very quick and efficient due to the resources publically provided. No further communication or resources were required outside of the publically accessible ones, meaning external developers could implement the platform without the need of internal developers, making the platform completely independant.
 
 <br><br>
 
@@ -51,18 +56,18 @@ For their involvement as proof-reader for this report.
 ## Introductions
 This report will describe and document the execution of my individual free-topic research. This research will be based on my indiviual project "Ordio". More information about Ordio can be found in my individual portfolio.
 
-This research will focus on the longevity and dependability of my in-house developed platform Ordio. Ordio is in essence a platform for other developers to build upon and offers developers a platform to use when building digital ordering applications for restaurants and food services alike. Ordio can provide menus for these applications and gives restaurant owners an application to create and import their menus easily.
+This research will focus on the dependability of my in-house developed platform Ordio. Ordio is in essence a platform for other developers to build upon and offers developers a platform to use when building digital ordering applications for restaurants and food services alike. Ordio can provide menus for these applications and gives restaurant owners an application to create and import their menus easily.
 
 <br>
 
-Because of its nature Ordio is not a very powerfull platform on its own. What gives the platform power is external developers building their applications on top of the existing platform. However, to make this possible in the first place one aspect is very important: The difficulty of integrating Ordio into new applications. A rule of thumb: The easier Ordio is to integrate into new applications, the more the platform will be used and the longer it stays relevant and active.
+Because of its nature Ordio is not a very powerfull platform on its own. What gives the platform power is external developers building their applications on top of the existing platform. However, to make this possible in the first place one aspect is very important: The difficulty of integrating Ordio into new applications.
 
 <br><br>
 
 ## Methodology
 This research will take a better look into difficulty of integrating the Ordio platform into new applications for external developers with the provided documentation. The main research question is as follows:
 
-> How independent is the Ordio platform and how does this bode for the longevity of the platform?
+> How independent is the Ordio platform?
 
 <br>
 
@@ -201,7 +206,9 @@ A combination of Swagger endpoint documentation and a Step-by-step implementatio
 
 <br>
 
-Test
+To determine how much time an external developer needs to learn how to use and implement the Ordio platform in their application with the given documentation, one was asked to make an implementation with this documentation. During this process the amount of time spend researching and implementing the platform was noted. The result of this can be found in table [T.1A](#t1a---timetable). 
+
+From this date the following conclusion can be drown: an implementation of the Ordio platform in an application could be made very quickly, taking only three hours, half to one of which being spend researching the platform and implementation methods. This is a very short time concidering the external developer had no previous knowledge about the Ordio platform.
 
 <br><br>
 
@@ -209,7 +216,26 @@ Test
 
 <br>
 
-Test
+To determine the difficulty of the implementation process of the Ordio platform for external developers with the given documentatio, a questionnaire was used. This questionnaire asked a few general questions about the implementation process. The result of this questionnaire can be found in table [T.3A](#t3a---questionnaire).
+
+From this questionnaire the following conclussions can be drawn: the external developer had no issue implementing the Ordio platform with the given documentation, and the documentation provided was clear, easy to use, and usefull.
+
+<br>
+
+Furthermore, a small interview was held about the implementation proccess. The result of this interview was as follows:
+
+<br>
+
+> What part of the documentation did you find most usefull?
+
+I found the Swagger portal very usefull. Furthermore, the provided code snippets made the implemntation process so much more fluent. Defintely a big help!
+
+<br>
+
+> Did you miss any documentation that would've helped you in your implementation process?
+
+No, everything that was needed for implementing the platform was provided through the public documentation. I did not feel like any more information would be necessary.
+
 
 <br><br>
 
@@ -218,6 +244,10 @@ Test
 <br>
 
 To determine the amount of extra communication needed between te testgroup and in-house developers all communication relating to the implementation of the Ordio platform will be documented over the course of this research. All the collected data from the testgroup is documented in table [T.A1](#tables). From this information the following conclusions can be drawn:
+
+<br>
+
+Very litle to no aditional communication was required. A total of around 20 minutes of communication was held, 10 of which being about the requirements and introduction. The other communication was not about the implementation of the Ordio platform, but rather about a small bug with the existing Admin webtool, meaning no additional communication besides the provided public documentation was needed about the implementation to make an implementation of the ordio platform as external developer.
 
 
 <br><br>
@@ -244,3 +274,16 @@ To determine the amount of extra communication needed between te testgroup and i
 <br><br>
 
 ## Tables
+
+> ### T.1A - Timetable
+![Timetable](./Media/Timetable.PNG)
+
+<br>
+
+> ### T.2A - Communication Log
+![Communication log](./Media/Communicationlog%20.PNG)
+
+<br>
+
+> ### T.3A - Questionnaire
+![Questionnaire](./Media/Questionnaire.PNG)
