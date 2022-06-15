@@ -10,6 +10,7 @@ In this document I will showcase the different products I have made during this 
 - [Docker](#docker)
 - [API Documentation](#api-documentation)
 - [Ordio admin webtool](#ordio-admin-webtool)
+- [Testing](#testing)
 - [Auth0](#auth0)
 - [Public hosting](#public-hosting)
 
@@ -384,6 +385,28 @@ The intergration of Auth0 priveds a safe and secure way for users to log in and 
 ### Outcomes
 This product touches learning outcome 1
 
+<br><br>
+
+## Testing
+Testing is build into the Ordio platform on multiple levels. Testing is import to first of all ensure an application works without having to manually test every part of it after an update, but can also be used to ensure the quality and functionality to stakeholders. Ordio runs tests on the following levels:
+
+<br>
+
+### Unit Testing
+The first step is unit testing. This means testing the functionality of one specific application. In the Ordio platform this happens at two point: The menu-microservice and the admin webtool both have build in unit tests meant for ensuring the functionality of each application. The menu-microservice tests the backend for expected functionality of certain methods, while the admin webtool runs frontend tests meant for testing user-interaction with the application.
+
+<br>
+
+| Menu-microservice | Admin webtool |
+| --- | --- |
+| ![Menu-microservice tests](./Media/menu-service%20tests.PNG) | ![Admin webtool tests](./Media/Admin%20webtool%20tests.PNG) |
+
+These unit tests are run automatically through GitHub actions and are required to pass for code to be pushed to the main branch of the GitHub repositories, which means code functionality on the main branch and thus live environment can be assured to be functional.
+
+<br>
+
+### Outcomes
+This product touches learning outcome 1
 
 <br><br>
 
@@ -405,7 +428,7 @@ While setting up the Auth0 services I ran into some major issues that sparked th
 <br>
 
 ### Outcomes
-This product touches learning outcome 1 and 4
+This product touches learning outcome 2
 
 <br><br>
 
@@ -454,6 +477,6 @@ The products above all cover parts of the learning outcomes. Below a table summe
 | Outcome | Products |
 | --- | --- |
 |  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker), [API Documentation](#api-documentation), [Ordio Admin Webtool](#ordio-admin-webtool), [Auth0](#auth0), [Public Hosting](#public-hosting) |
-|  2. Software quality: You use software tooling and methodology that continuously monitors and improve the software quality during software development.  | [Ordio API Microservice](#ordio-api-microservice), [API Gateway](#api-gateway), [GitHub](#github) |
+|  2. Software quality: You use software tooling and methodology that continuously monitors and improve the software quality during software development.  | [Ordio API Microservice](#ordio-api-microservice), [API Gateway](#api-gateway), [GitHub](#github), [Testing](#testing) |
 | 3. CI/CD: You implement a (semi)automated software release process that matches the needs of the project context. | [GitHub](#github), [Docker](#docker) |
 | 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation), [Auth0](#auth0), [Public Hosting](#public-hosting) |
