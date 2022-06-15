@@ -37,7 +37,7 @@ For their involvement as proof-reader for this report.
 <br><br>
 
 ## Summary
-This research looks into the dependability of the platform I developed named "Ordio". To determine this, I looked into the difficulty of implementing the platform into applications by external developers using only publically accessible documentation.
+This research looks into the dependability of the platform I developed named "Ordio". To determine this, I looked into the difficulty of implementing the platform into applications by external developers using only publically accessible documentation. An implementation of the platform was made to test this by [Jeffrey Derksen](https://github.com/jeffrey-fontys). The final proof of concept application can be found [here](https://robinvanhoof.tech) and the code of this proof of concept can be found [here](https://github.com/FHICT-Ordio/ordio-frontend-poc).
 
 <br>
 
