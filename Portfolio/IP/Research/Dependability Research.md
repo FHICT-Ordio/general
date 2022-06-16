@@ -84,14 +84,14 @@ To help answer this question I split the main research question into multiple su
 <br>
 
 ### Research Stratagies
-This research was conducting using the DOT framework (<b>D</b>evelopment <b>O</b>riented <b>T</b>riangulation). The following research stratagies will be used for each research question:
+This research was conducting using the DOT framework (**D**evelopment **O**riented **T**riangulation). The following research stratagies will be used for each research question:
 
 | Research Question | Research Strategy |
 | --- | --- |
-| <b>(1)</b> What form of documentation does an external developer need to implement the Ordio platform into a new application? | Library-, Showroom- and Workshop-research |
-| <b>(2)</b> How much time does an external developer need to learn how to use and implement the Ordio platform in their application with the given documentation? | Workshop-research |
-| <b>(3)</b> How difficult is the implementation process of Ordio for external developers with the given documentation? | Workshop- and Field-research |
-| <b>(4)</b> How much extra communication between in-house and external developers besides the public documentation is needed to comfortably implement Ordio into a new application? | Workshop-research |
+| **(1)** What form of documentation does an external developer need to implement the Ordio platform into a new application? | Library-, Showroom- and Workshop-research |
+| **(2)** How much time does an external developer need to learn how to use and implement the Ordio platform in their application with the given documentation? | Workshop-research |
+| **(3)** How difficult is the implementation process of Ordio for external developers with the given documentation? | Workshop- and Field-research |
+| **(4)** How much extra communication between in-house and external developers besides the public documentation is needed to comfortably implement Ordio into a new application? | Workshop-research |
 
 <br>
 
@@ -100,11 +100,11 @@ To cunduct and manage this research a number of instruments are used. These are 
 
 - Questionnaire
 
-In this research a questionnaire will be used to get an insight into the difficulty of implementing the Ordio platform into a new application by external developers. This questionnaire will be filled in by our testgroup. A copy of the questionnaire is included in appendice [A.1C](#appendices).
+In this research a questionnaire will be used to get an insight into the difficulty of implementing the Ordio platform into a new application by external developers. This questionnaire will be filled in by our testgroup. A copy of the questionnaire is included in appendice [A.1B](#appendices).
 
 - Timelog
 
-I this research a timelog will be used to get an insight into the time external developes need to learn how to use and implement the Ordio platform into their application. This timelog will be filled in by the testgroep. A copy of the timelog is included in appendice [A.1B](#appendices).
+I this research a timelog will be used to get an insight into the time external developes need to learn how to use and implement the Ordio platform into their application. This timelog will be filled in by the testgroep. A copy of the timelog is included in appendice [A.1A](#appendices).
 
 - Communicationlog
 
@@ -115,7 +115,7 @@ In this research a communicationlog will be used to get an insight into the amou
 ### Testgroup
 To conduct this research an implementation of an application using the Ordio application needs to actually be developed. This is a very time-consuming task which makes conducting this research on a large testgroup impractical due to a lack of fund and time.
 
-For this reason a testgroup of one singular developer will be used to conduct this research. All gathered data will come from this one developer. The selection of this developer is not on random basis but will be picked from a close environment with a background in (web)development but <b>no</b> experience with the Ordio platform.
+For this reason a testgroup of one singular developer will be used to conduct this research. All gathered data will come from this one developer. The selection of this developer is not on random basis but will be picked from a close environment with a background in (web)development but **no** experience with the Ordio platform.
 
 <br>
 
@@ -198,6 +198,8 @@ Taking the above mentioned aspects in mind, a conclusion can be drawn. Since the
 <br>
 That brings us back to the main question: <i>What documentation does an external developer need to implement the Ordio platform into a new application?</i>
 
+<br>
+
 A combination of Swagger endpoint documentation and a Step-by-step implementation guide.
 
 <br><br>
@@ -253,7 +255,7 @@ Very litle to no aditional communication was required. A total of around 20 minu
 <br><br>
 
 ## References
-> Marcelmeesters and various authors. (2018, February 9). <i>The DOT Framework</i>. Retreived May 30, 2022, from WikiText: https://ictresearchmethods.nl/The_DOT_Framework
+> Marcelmeesters and various authors. (2018, February 9). *The DOT Framework*. Retreived May 30, 2022, from WikiText: https://ictresearchmethods.nl/The_DOT_Framework
 
 <br><br>
 
