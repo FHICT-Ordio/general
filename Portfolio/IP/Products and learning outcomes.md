@@ -19,7 +19,7 @@ In this document I will showcase the different products I have made during this 
 <br><br>
 
 ## Ordio API microservice
-The first major product I have made for this project is the main API backend application that feeds the entire Ordio platform with all its data. This API containst two kinds of endpoints meant for two different purposes: Secured and Public access points. I decided to split these up becouse different application-integrations of the API require different levels of credentials. To make sure developers can make implementations where authorization is not at all required the enpdoints have been split in two categories. In turn, this also means the authorization-platform-details will not have to be publically accessible for external developers to work with Ordio.
+The first major product I have made for this project is the main API backend application that feeds the entire Ordio platform with all its data. This API containst two kinds of endpoints meant for two different purposes: Secured and Public access points. I decided to split these up because different application-integrations of the API require different levels of credentials. To make sure developers can make implementations where authorization is not at all required the enpdoints have been split in two categories. In turn, this also means the authorization-platform-details will not have to be publically accessible for external developers to work with Ordio.
 
 ### Secure access points
 The first kind of access point are secure access points. These are any access points that require authorization through Auth0 (which will be touched upon later in the [Auth0](#auth0) chapter). These access points are most of the CRUA access points for the data and are mainly meant to only be accessed by authorized services. These access points provide authorized developers the possibility to manipulate the stored data through API calls.
@@ -82,17 +82,19 @@ After setting up the first version of the API microservice it was time to start 
 Next up was CI/CD implementation. CI/CD stands for continuous integration and continuous delivery, meaning automation of integration and delivery/deployment of the many different aspects of the project. Every repository of my project runs roughly the same CI/CD process. This process contains a few different key steps:
 
 - #### Build- and unit-testing
-The first step of the CI/CD process is quite straight forword: Test if the application can be build successfully in the first place. If so, run all the applications unit tests. Do these also pass? If so, this step has succeeded.
+The first step of the CI/CD process is quite straight forword: Test if the application can be build successfully in the first place. If so, run all the applications unit tests. Do these also pass? If so, this step has succeeded. I decided to set up automated build- and unit-testing to ensure that only functional code can be pushed to the main branches meaning the live environment will always have functional code.
 
 - #### Docker build-testing and deployment
 The next step in the CI/CD process is docker testing and possibly deployment. All microservices and standalone applications of the Ordio project run in dockerized containers. More about this will be discusses later in the [Docker](#docker) chapter. Docker requires docker images to build its containers. These images are supplied trough Dockerhub.
 
-Whenever a push or merge to a main branch occurs, the image on Dockerhub needs to be updated with the new most recent code. The CI/CD is responsible for this! First of all, GitHub will test if the dockerimage can be build from the new files in the main branch, using each branches custom made Dockerfiles. If the build succeeds, next the CI/CD process will log into Dockerhub with the credentials provided through GitHub secrets, and push the build docker image to their corresponding Dockerhub registries. If both these steps succeed the new image has successfully been deployed to Dockerhub and is ready for server-sided deployment
+Whenever a push or merge to a main branch occurs, the image on Dockerhub needs to be updated with the new most recent code. The CI/CD is responsible for this! First of all, GitHub will test if the dockerimage can be build from the new files in the main branch, using each branches custom made Dockerfiles. If the build succeeds, next the CI/CD process will log into Dockerhub with the credentials provided through GitHub secrets, and push the build docker image to their corresponding Dockerhub registries. If both these steps succeed the new image has successfully been deployed to Dockerhub and is ready for server-sided deployment.
 
 - #### Swagger-collection
 The next step in the CI/CD process is one only executed for API microservice branches. These branches contain yaml files with definitions for Swagger (Which will be talked about more in the [API Documentation](#swagger) chapter) to use for the generation of API documentation. However, in the case of multiple API microservices, having these Swagger files spread over possibly countless seperate repositories can be very frustrating and makes this documentation near to useless.
 
 What if we could collect all these Swagger files and put them on one general branch then? We can! This step in the CI/CD process is responsible for exactly this: Whenever changes to an API microservice get pushed or merged to one of the repositories main branches, take said yaml file and push it to one main repository, where the independent files get combined into one Swagger interface: the Ordio Swagger portal. This page is hosted on GitHub where independent developers can use it to implement the API. The best part: Whenever any of the code of an API microservice changes, this Swagger portal also automatically updates the API definitions according to the current production code!
+
+Because the Ordio platform could in the future contain more microservices I decided to put this collection step in the CI. This way, the documentation from all future microservices could be collected and displayed in one main page. This would make it easier for developers to use the API since they dont need to go through multiple swagger environments and make the application more professional.
 
 
 <details>
@@ -179,7 +181,6 @@ jobs:
           git add .
           git commit -m "Add changes"
           git push
-
 ```
 
 </details>
@@ -195,9 +196,17 @@ CodeQL is a static code analysis tool integrated in GitHub. For my project I set
 - #### Dependabot
 The second technology I use to ensure safe code for production environments is Dependabot. Dependabot is another integrated GitHub tool that automatically scans used dependencies of applications and reports if it finds any possible vulnerabilities with these depenencies. All issues found are noted and reported to the brances Security panel, and if any of the vulnerabilities found are of High risk factor, the merge will be blocked until fixed or the merge is forced through. Furthermore, Dependabot will also automatically try to fix any vulnerabilities found by either automatically updating packages for you, or finding different similar packages to use instead.
 
+- #### SonarCloud
+SonarCloud is another static code analisis tool. This is a thrid party tool without integrated GitHub support, but can be supplied with code through GitHub actions. Whenever a merge request is made, the code will also be sent to the SonarCloud service that analyses the code for possible vulnerabilities, code duplication, code smells and many more coding standards.
+
 | CodeQL | Dependabot |
-| --- | ---- |
+| --- | --- |
 | ![CodeQL](./Media/CodeQL.png) | ![Dependabot](./Media/Dependabot.png) |
+| **Sonar Cloud** ![SonarCloud](./Media/SonarCloud.PNG) |
+
+<br>
+
+All these quality assurance tools run automatically. I implemented these to ensure code quality of live applications. In a development team the results of these can be used first of all to for example find bugs before they reach live environments, but also the ensure that code is safe, which could be a strong selling point for stakeholders. In a development project these platforms would need to be checked regularly since they require no active interaction. This could be done by for example looking at the results of these platforms in every sprint retrospective and picking a number of vulnerabilities to fix each following sprint.
 
 <br>
 
@@ -227,7 +236,7 @@ This container hosts the API gateway application described in [API Gateway](#api
 This container hosts the Ordio database. This is an MSSQL database which is responsible for storing all data the Ordio platform needs. The content of this database dynamically updates using Migrations whenever changes to the code structure are made;
 
 - #### Watchtower container
-To make sure all the containers stay up do date with the latest code on the main GitHub branches, I use an extension called Watchtower. Watchtower is a dockerised application running next to the other containers which on regular intervals checks if new images of the other appications have been pushed to DockerHub. If so, Watchtower wil automatically restart the container and pull the latest code to make sure the production environment always stays up to date;
+To make sure all the containers stay up do date with the latest code on the main GitHub branches, I use an extension called Watchtower. Watchtower is a dockerised application running next to the other containers which on regular intervals checks if new images of the other appications have been pushed to DockerHub. If so, Watchtower wil automatically restart the container and pull the latest code to make sure the production environment always stays up to date. I decided to go for a Watchtower container as a quick solution for automated deploymen: This means that the code in running containers wil always be up to date with the latest GitHub main repository code. This in turn also makes running a public production environment possible and a lot easier;
 
 <br>
 
@@ -262,14 +271,16 @@ services:
       Kestrel__Endpoints__Http__Url: "http://+:2000"
       Kestrel__Endpoints__Https__Url: "https://+:1000"
       # SSL Bindings
-      ASPNETCORE_Kestrel__Certificates__Default__Password: "letmein"
-      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/certs/fullchain4.pem"
+      ASPNETCORE_Kestrel__Certificates__Default__KeyPath: "/certs/privkey4.pem"
     volumes:
       - ~/.aspnet/https:/https:ro
+      - C:\Certbot\archive\robinvanhoof.tech:/certs
     ports:
-      - 8080:1000
+      - 1000:1000
     networks:
       - service-network
+      - default
   
   # Data Services
   db:
@@ -296,10 +307,10 @@ services:
       Kestrel__Endpoints__Http__Url: "http://+:2001"
       Kestrel__Endpoints__Https__Url: "https://+:1001"
       # SSL Bindings
-      ASPNETCORE_Kestrel__Certificates__Default__Password: "letmein"
-      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/certs/fullchain4.pem"
+      ASPNETCORE_Kestrel__Certificates__Default__KeyPath: "/certs/privkey4.pem"
     volumes:
-      - ~/.aspnet/https:/https:ro
+      - C:\Certbot\archive\robinvanhoof.tech:/certs
     ports:
       - 1001:1001
     depends_on:
@@ -314,13 +325,32 @@ services:
     image: robinvhoof/admin-client:latest
     environment:
       # API Host Definitions
-      REACT_APP_API_URL: "https://robinvanhoof.tech:1000"
-      HTTPS: true
+      REACT_APP_API_URL: "https://api.robinvanhoof.tech"
+      SSL_CRT_FILE: "/certs/fullchain4.pem"
+      SSL_KEY_FILE: "/certs/privkey4.pem"
+      HTTPS: "true"
     ports:
       - 3000:3000
+    volumes:
+      - C:\Certbot\archive\robinvanhoof.tech:/certs
+
+  frontend:
+    container_name: frontend-client
+    image: robinvhoof/ordio-frontend:latest
+    environment:
+      # API Host Definitions
+      SSL_CRT_FILE: "/certs/fullchain3.pem"
+      SSL_KEY_FILE: "/certs/privkey3.pem"
+      HTTPS: "true"
+    ports:
+      - 3001:3000
+    volumes:
+      - C:\Certbot\archive\robinvanhoof.tech:/certs
 
 # Networking
 networks:
+  default:
+    name: nginx-network
   service-network:
     driver: bridge
 ```
@@ -467,7 +497,7 @@ The last step in publishing the Ordio platform was setting up DNS records for th
 <br>
 
 ### Outcomes
-This product touches learning outcome 1 and 4
+This product touches learning outcome 1
 
 <br><br><br>
 
@@ -479,4 +509,4 @@ The products above all cover parts of the learning outcomes. Below a table summe
 |  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker), [API Documentation](#api-documentation), [Ordio Admin Webtool](#ordio-admin-webtool), [Auth0](#auth0), [Public Hosting](#public-hosting) |
 |  2. Software quality: You use software tooling and methodology that continuously monitors and improve the software quality during software development.  | [Ordio API Microservice](#ordio-api-microservice), [API Gateway](#api-gateway), [GitHub](#github), [Testing](#testing) |
 | 3. CI/CD: You implement a (semi)automated software release process that matches the needs of the project context. | [GitHub](#github), [Docker](#docker) |
-| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation), [Auth0](#auth0), [Public Hosting](#public-hosting) |
+| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation), [Auth0](#auth0) |
