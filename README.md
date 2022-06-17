@@ -1,6 +1,12 @@
 # Software S3 Portfolio depository - <br> Robin van Hoof
 
-[![Menu-service API](https://github.com/FHICT-Ordio/menu-service/actions/workflows/Main.yml/badge.svg?branch=main)](https://github.com/FHICT-Ordio/menu-service/actions/workflows/Main.yml)
+Menu-service API: [![Menu-service API](https://github.com/FHICT-Ordio/menu-service/actions/workflows/Main.yml/badge.svg?branch=main)](https://github.com/FHICT-Ordio/menu-service/actions/workflows/Main.yml)
+
+Admin client: [![Admin-client](https://github.com/FHICT-Ordio/admin-client/actions/workflows/Main.yml/badge.svg?branch=main)](https://github.com/FHICT-Ordio/admin-client/actions/workflows/Main.yml)
+
+Gateway: [![Gateway](https://github.com/FHICT-Ordio/api-gateway/actions/workflows/Main.yml/badge.svg?branch=main)](https://github.com/FHICT-Ordio/api-gateway/actions/workflows/Main.yml)
+
+Frontend: [![Frontend](https://github.com/FHICT-Ordio/ordio-frontend-poc/actions/workflows/Main.yml/badge.svg?branch=main)](https://github.com/FHICT-Ordio/ordio-frontend-poc/actions/workflows/Main.yml)
 
 ![Portfolio](https://i.ytimg.com/vi/TwYKwaEjJd4/maxresdefault.jpg)
 
