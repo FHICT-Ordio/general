@@ -181,6 +181,46 @@ jobs:
           git add .
           git commit -m "Add changes"
           git push
+          
+  sonarcloud:
+    name: Sonar Cloud Build
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"FHICT-Ordio_menu-service" /o:"fhict-ordio" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build ./menu-service/
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 ```
 
 </details>
@@ -191,7 +231,7 @@ jobs:
 GitHub also provides very useful tools to analyse your code and make sure no vulnerabilities slip through the cracks. My project uses two major technologies that check and notify about exactly this. These are also part of the CI/CD process. These technologies are the following:
 
 - #### CodeQL
-CodeQL is a static code analysis tool integrated in GitHub. For my project I set up CodeQL so that whenever a merge request onto any of the main branches is made, GitHub will first check the code quality and vulnerabilities before allowing said code to be pushed at all. Any vulnerabilities are noted and reported to the branches Security panel. If any of the vulnerabilities found are of High risk factor, the merge will be blocked until the vulnerabilities are fixed or the merge is forced through. I decided to use CodeQL as main static code analysis tool for one major reason: This tool is natively offered by GitHub, meaning its widely used and we can assume very accurate and secure.
+CodeQL is a static code analysis tool integrated in GitHub. For my project I set up CodeQL so that whenever a merge request onto any of the main branches is made, GitHub will first check the code quality and vulnerabilities before allowing said code to be pushed at all. Any vulnerabilities are noted and reported to the branches Security panel. If any of the vulnerabilities found are of High risk factor, the merge will be blocked until the vulnerabilities are fixed or the merge is forced through. I decided to use CodeQL as main static code analysis tool for one major reason: This tool is natively offered by GitHub, meaning its widely used and we can assume very accurate and secure. Furthermore, CodeQL is very powerful for testing both backend and frontend code and is very good at finding vulnerabilities that a developer would not find during normal code refactoring. CodeQL is fully automated in the CI step meaning no manual work is required.
 
 - #### Dependabot
 The second technology I use to ensure safe code for production environments is Dependabot. Dependabot is another integrated GitHub tool that automatically scans used dependencies of applications and reports if it finds any possible vulnerabilities with these depenencies. All issues found are noted and reported to the brances Security panel, and if any of the vulnerabilities found are of High risk factor, the merge will be blocked until fixed or the merge is forced through. Furthermore, Dependabot will also automatically try to fix any vulnerabilities found by either automatically updating packages for you, or finding different similar packages to use instead.
@@ -429,14 +469,19 @@ The first step is unit testing. This means testing the functionality of one spec
 
 | Menu-microservice | Admin webtool |
 | --- | --- |
-| ![Menu-microservice tests](./Media/menu-service%20tests.PNG) | ![Admin webtool tests](./Media/Admin%20webtool%20tests.PNG) |
+| ![Menu-microservice tests](./Media/menu-service%20tests.PNG) <br> I decided to test these two classes as they are important classes for the security of the microservice and user information | ![Admin webtool tests](./Media/Admin%20webtool%20tests.PNG) |
 
 These unit tests are run automatically through GitHub actions and are required to pass for code to be pushed to the main branch of the GitHub repositories, which means code functionality on the main branch and thus live environment can be assured to be functional.
 
 <br>
 
+### Integration Testing
+Another important part of testing projects like these is Integration testing. Integration testing means externally testing a service or application without the use of external services. Integration testing can be used to fully test the functionality of an application and if/how they would work together with other application. Unfortunately, due to time restraints, I was not able to implement Integration tests into the Ordio platform. However, integration tests are a very important testing step and would be very important for any large scale project.
+
+<br>
+
 ### Outcomes
-This product touches learning outcome 1
+This product touches learning outcome 2
 
 <br><br>
 
@@ -509,4 +554,4 @@ The products above all cover parts of the learning outcomes. Below a table summe
 |  1. Web application: You design and build user-friendly, full-stack web applications. | [Ordio API Microservice](#ordio-api-microservice), [API Gatewayway](#api-gateway), [Docker](#docker), [API Documentation](#api-documentation), [Ordio Admin Webtool](#ordio-admin-webtool), [Auth0](#auth0), [Public Hosting](#public-hosting) |
 |  2. Software quality: You use software tooling and methodology that continuously monitors and improve the software quality during software development.  | [Ordio API Microservice](#ordio-api-microservice), [API Gateway](#api-gateway), [GitHub](#github), [Testing](#testing) |
 | 3. CI/CD: You implement a (semi)automated software release process that matches the needs of the project context. | [GitHub](#github), [Docker](#docker) |
-| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation), [Auth0](#auth0) |
+| 4. Professional: You act in a professional manner during software development and learning. | [API Gateway](#api-gateway), [GitHub](#github), [Docker](#docker), [API Documentation](#api-documentation), [Auth0](#auth0), [Research](https://github.com/FHICT-Ordio/general/tree/main/Portfolio/IP/Research) |

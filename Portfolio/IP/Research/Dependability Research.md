@@ -64,12 +64,14 @@ Because of its nature Ordio is not a very powerfull platform on its own. What gi
 
 <br><br>
 
-## Methodology
+## Main Research Question
 This research will take a better look into difficulty of integrating the Ordio platform into new applications for external developers with the provided documentation. The main research question is as follows:
 
-> How independent is the Ordio platform?
+> How much difficulty does implementing the Ordio platform prove for external developers with the publically available documentation?
 
-<br>
+<br><br>
+
+## Methodology
 
 To help answer this question I split the main research question into multiple sub questions:
 
