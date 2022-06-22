@@ -42,9 +42,19 @@ An overview of the Dutch scores in the hofstede framework can be found [here](ht
 <br><br>
 
 ## Personal Experience with Cultural Differences
+### Software Semester 3 Eeventify project Finnish Collaboration
 This semester we did a proftaak group project called Eeventify. This was an international project where we worked together with a Finnish development team to create a social application used for connecting people. During the development process a lot of communication was had between the Dutch development team and the Finnish development team. This was done through online meetings. 
 
 Clear differences but also many similarities in a lot of the dimensions of the Hofstedes framework could be recognised during the span of the project. For example, a very clear aspect that could be noticed during the development process was in the Individualism VS Collectivism dimension. Where as the Dutch culture is very focues on individuals, the collectivistic view of the Finnish development team was very noticable. The Finnish developers tended to be very giving during negotiations or talks where they were very quick to seek a compromise between our and their wants in the project.
+
+<br>
+
+### Project Void British Collaboration
+In a hobby project in the gamedesign sector of IT, I collaborated with a small group of Dutch and British developers in a project where we made a small game. As mentioned, the development group consisted of both Dutch and Britisch software developers. Within this project group there was a noticable difference in cultures between the Dutch and British developers, mainly in the Uncertainty Avoidance dimension:
+
+While many of the Dutch developers were quite lax regarding project requirements and Definitions of Done for these requirements, the British developers wanted to make solid and written in depth agreements about both the requirements and Definiton of Done. Eventually the Dutch developers did align with the Brits and we did set up the in depth agreements they wanted.
+
+<br><br>
 
 ## References
 > Charlotte Nickerson (2022, May 4). *Hofstede’s Cultural Dimensions Theory*. Retreived June 22, 2022, from Simply Psychology: https://www.simplypsychology.org/hofstedes-cultural-dimensions-theory.html
