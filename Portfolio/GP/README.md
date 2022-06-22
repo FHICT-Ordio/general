@@ -55,6 +55,7 @@ As part of our curriculum we did research into agile methods. One of these Agile
 <br><br>
 
 ## Cultural differences and ethics
+As part of our curriculum we looked into Cultural differences and ethics of software engineering. Two short documents detailing the process of both these documents were made. The document about Cultural differences can be found [here](./Ethics%20and%20Cultural%20differences/Cultural%20differences.md). The document about Ethics can be found [here](./Ethics%20and%20Cultural%20differences/Ethics.md).
 
 <br><br>
 
@@ -64,6 +65,7 @@ To determine the requirements for our project we sat down together with the Fins
 <br><br>
 
 ## Business processes
+***Placeholder***
 
 <br><br>
 
@@ -84,4 +86,8 @@ One of the goals I set for myself for this group project was working on my commu
 
 <br>
 
-Finaly, to determine how everyone felt about the teamwork and communication we decided to do a peer review at the end of the project. The results of these can be found [Insert result].
+Finaly, to determine how everyone felt about the teamwork and communication we decided to do a peer review at the end of the project. The results of this peer review can be found in the Canvas. Furthermore, an overview the last peer review is shown below:
+
+<br>
+
+![Peer review](./Media/Peer%20review.PNG)
