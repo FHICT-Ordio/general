@@ -65,7 +65,7 @@ To determine the requirements for our project we sat down together with the Fins
 <br><br>
 
 ## Business processes
-***Placeholder***
+As part of our curriculum we looked into Business processes and what they were. This toppic is further detailed in the *"Business procesess.md"* document that can be found [here](./Business%20process.md).
 
 <br><br>
 
